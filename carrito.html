@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrito</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Play&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="navig">
+          <a href="index.html">
+            <div class="nav-div">
+              <ion-icon class="icon" name="logo-tux"></ion-icon>DiciSHOP
+            </div>
+          </a>
+        </nav>
+      </header>
+      <main>
+        <div class="product-title">
+          <h2 class="titulo-p">Carrito de compras</h2>
+        </div>
+        <!-- !-- Contenedor principal de elementos del carrito-_! -->
+        <div id="cart-products">
+          <!-- Aquí se cargan los productos del carrito -->
+        </div>
+
+        <div class="cart-actions-total">
+          <div class="container-total-cart">
+            <p><span id="total-quantity">1</span></p>
+            <p><span id="total-price">1000</span></p>
+          </div>
+          <div class="cart-actions">
+            <div class="cart-actions-left">
+              <button id="clearCartBtn">Vaciar Carrito</button>
+            </div>
+            <div class="cart-actions-right">
+              <button id="finalBtn">Finalizar Compra</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <div class="footer">
+        <div class="row">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
+          <a href="#"><i class="fa fa-youtube"></i></a>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+        </div>
+
+        <div class="row">
+          <ul>
+            <li><a href="#">Contactanos</a></li>
+            <li><a href="#">Otros servicios</a></li>
+            <li><a href="#">Terminos y condiciones</a></li>
+          </ul>
+        </div>
+
+        <div class="row">
+          DiciShop Copyright © 2025 - All rights reserved || Designed By:
+          Nicoici
+        </div>
+      </div>
+    </footer>
+    
+    <!-- Script de Toastify para notificaciones -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./js/carrito.js"></script>
+  </body>
+</html>
