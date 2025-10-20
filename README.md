@@ -1,4 +1,5 @@
 # **Ecommerce DcShop** 🛒
+Tienda online de productos de ropa.
 
 ### Tecnologías utilizadas:
 - JavaScript

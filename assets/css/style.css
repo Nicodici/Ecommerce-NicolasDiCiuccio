@@ -37,32 +37,32 @@ ul {
 }
 
 .li-button {
-  border: none; /* Remove border */
-  padding: 10px 20px; /* Padding around the text */
-  text-align: center; /* Center the text */
-  text-decoration: none; /* Remove underline */
-  font-size: 16px; /* Font size */
-  cursor: pointer; /* Change cursor to pointer on hover */
+  border: none;
+  padding: 10px 20px; 
+  text-align: center; 
+  text-decoration: none; 
+  font-size: 16px; 
+  cursor: pointer; 
   background-color: transparent;
 }
 
 .li-span {
   color: #f0f0f0;
-  font-size: 0.8rem; /* Font size */
-  padding: 10px 20px; /* Padding around the text */
-  text-align: center; /* Center the text */
-  text-decoration: none; /* Remove underline */
-  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 0.8rem; 
+  padding: 10px 20px; 
+  text-align: center; 
+  text-decoration: none; 
+  cursor: pointer; 
   background-color: transparent;
-  border-radius: 5px; /* Rounded corners */
-  transition: all 0.3s ease-in-out; /* Smooth transition */
+  border-radius: 5px; 
+  transition: all 0.3s ease-in-out;
 }
 
 .li-span:hover {
-  color: #00ac7c; /* Change text color on hover */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 0.9rem; /* Font size */
-  transition: all 0.3s ease-in-out; /* Smooth transition */
+  color: #3157ff; 
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease-in-out; 
 }
 
 #number {
@@ -91,26 +91,26 @@ html {
 .titulos {
   display: flex;
   justify-content: left;
+  margin: 30px 20px 0px 20px;
 }
 .titulo-p {
   font-family: "Varela Round", sans-serif;
   color: #000000;
   font-size: 2rem;
-  margin: 30px;
 }
 
 /* css de los cards */
 
 .card {
   position: relative;
-  width: 280px;           /* Ancho fijo */
-  height: 380px;          /* Alto fijo */
+  width: 280px;
+  height: 380px;
   box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 120ms;
   display: flex;
   flex-direction: column;
-  align-items: stretch;   /* Elementos ocupan todo el ancho */
+  align-items: stretch;
   background: #fff;
   padding: 1rem;
   margin: 15px;
@@ -157,16 +157,15 @@ html {
   overflow: hidden;
 }
 
+
 .card .title {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   font-weight: 500;
   color: #333;
   line-height: 1.2;
-  display: -webkit-box;
   -webkit-line-clamp: 2;  /* Máximo 2 líneas */
   line-clamp: 2;          /* Propiedad estándar */
-  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
@@ -174,14 +173,14 @@ html {
 
 /* Contenedor del precio */
 .price-container {
-  margin: 0.5rem 0;
+  margin: 0.2rem 0;
 }
 
 .card .price {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #2ba8fb;
+  color: #181818;
   margin: 0;
 }
 
@@ -189,10 +188,12 @@ html {
 .button-container {
   margin-top: auto;      /* Empuja el botón hacia abajo */
   padding-top: 1rem;
+  display:flex;
+  justify-content: center;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-1px);
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -207,7 +208,7 @@ html {
   padding: 12px 20px;
   border: none;
   border-radius: 8px;
-  background-color: #2ba8fb;
+  background-color: #2384c5;
   color: #ffffff;
   font-weight: 600;
   font-size: 0.9rem;
@@ -215,12 +216,12 @@ html {
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
+  }
 
 .productAddBtn:hover {
   background-color: #1e96e8;
   box-shadow: 0 4px 15px rgba(43, 168, 251, 0.3);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .productAddBtn:active {
@@ -276,16 +277,12 @@ html {
 
 .list-size .item-list-button {
   cursor: pointer;
-
   padding: 0.5rem;
   background-color: var(--zinc-800);
-
   font-size: 0.75rem;
   color: var(--light);
-
   border: 2px solid var(--zinc-800);
   border-radius: 0.25rem;
-
   transition: all 0.3s ease-in-out;
 }
 
@@ -294,9 +291,7 @@ html {
 }
 .item-list-button:focus {
   background-color: var(--primary);
-
   border: 2px solid var(--primary-shadow);
-
   box-shadow: inset 0px 1px 4px var(--primary-shadow);
 }
 
@@ -305,13 +300,6 @@ html {
   align-items: center;
   gap: 1rem;
 }
-
-.price {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--light);
-}
-
 .cart-button .cart-icon {
   width: 1rem;
 }
@@ -322,7 +310,7 @@ html {
   box-sizing: inherit;
   padding: 0;
   margin: 0;
-  letter-spacing: 1.1px;
+  letter-spacing: 0.4px;
 }
 
 .navig {
@@ -680,7 +668,7 @@ html {
   grid-area: precio;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #2ba8fb;
+  color: #071925;
   text-align: right;
   margin: 0;
 }

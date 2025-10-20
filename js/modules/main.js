@@ -13,7 +13,6 @@ const numberCart = document.querySelector("#number");
 let arrayCart = JSON.parse(localStorage.getItem("products-in-cart")) || [];
 const cartLink = document.querySelector("#cart-link");
 const navDiv = document.querySelector(".nav-div:last-child"); // Selector correcto para el nav-div del carrito
-
 // <<<<<<<<<<<<<QuerySelectors>>>>>>>>>>>
 
 
@@ -41,7 +40,7 @@ function cargarProductos(productos) {
           <p class="price">$ ${producto.precio.toLocaleString()}</p>
         </div>
         <div class="button-container">
-          <button class="productAddBtn" id="${producto.id}">Agregar al carrito</button>
+          <button class="productAddBtn" id="${producto.id}">Agregar</button>
         </div>
       </div>
     </div>`
@@ -56,13 +55,14 @@ function cargarProductos(productos) {
 cargarProductos(productosRopa);
 
 let prodFilters = [];
+
 //filtro por categorias
 botonesCategorias.forEach(button => {
   button.addEventListener('click', (e) => {
 
     if (e.currentTarget.id === "filterAll") {
       prodFilters = productosRopa;
-      tituloPrincipal.innerHTML = "Todos los productos";
+      tituloPrincipal.innerHTML = "Todos nuestros productos";
     } else {
       prodFilters = productosRopa.filter(producto => producto.categoria.id.toLowerCase() === e.currentTarget.id);
       tituloPrincipal.innerHTML = prodFilters[0].categoria.nombre; // muestra el nombre de la primera categoría del filtro
@@ -83,13 +83,32 @@ function actButtons() {
 }
 
 let sumCartLst = 0;
+
+// Función para manejar click en carrito vacío
+function handleEmptyCartClick(e) {
+  e.preventDefault();
+  console.log(e);
+
+    Toastify({
+      text: "⚠️ Agrega productos al carrito para continuar",
+      duration: 3000,
+      gravity: "top",
+      position: "center",
+      backgroundColor: "#ff6b6b",
+      className: "warning-toast",
+      stopOnFocus: true,
+    }).showToast();
+  
+  return false;
+}
+
+//funcion que verifica el local storage y actualiza el carrito.
 const cartLocalStorage = () => {
   const productsCart = JSON.parse(localStorage.getItem("products-in-cart"));
   
   if (productsCart && productsCart.length > 0) {
-    // Hay productos en el carrito - HABILITAR
     sumCartLst = productsCart.reduce((acc, product) => acc + product.cantidad, 0);
-
+    
     // Habilitar el nav-div del carrito
     cartLink.href = "carrito.html";
     navDiv.style.pointerEvents = "auto";
@@ -97,37 +116,31 @@ const cartLocalStorage = () => {
     navDiv.style.cursor = "pointer";
     navDiv.classList.remove("cart-disabled");
     
-    // Remover evento de click bloqueado si existe
+    // IMPORTANTE: Remover todos los event listeners del carrito vacío
+    cartLink.removeEventListener('click', handleEmptyCartClick);
     cartLink.onclick = null;
     
+    console.log('Carrito habilitado - productos encontrados:', sumCartLst);
   } else {
-    // No hay productos - BLOQUEAR
     sumCartLst = 0;
     
-    // Bloquear el nav-div del carrito
+    // Configurar carrito como vacío pero MANTENER eventos
     cartLink.href = "#";
-    navDiv.style.pointerEvents = "none";
     navDiv.style.opacity = "0.5";
     navDiv.style.cursor = "not-allowed";
     navDiv.classList.add("cart-disabled");
     
-    // Prevenir navegación y mostrar mensaje
-    cartLink.onclick = (e) => {
-      e.preventDefault();
-      
-      // Mostrar notificación con Toastify
-      Toastify({
-        text: "⚠️ Agrega productos al carrito para continuar",
-        duration: 3000,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "#ff6b6b",
-        className: "warning-toast",
-        stopOnFocus: true,
-      }).showToast();
-      
-      return false;
-    };
+    // NO bloquear pointer events para permitir el click
+    navDiv.style.pointerEvents = "auto";
+    
+    // Limpiar eventos previos antes de agregar nuevos
+    cartLink.onclick = null;
+    cartLink.removeEventListener('click', handleEmptyCartClick);
+    
+    // Agregar nuevo event listener
+    cartLink.addEventListener('click', handleEmptyCartClick);
+    
+    console.log('Carrito deshabilitado - sin productos');
   }
   
   console.log("cantidad de productos en el local storage", sumCartLst);
@@ -145,20 +158,19 @@ function AddToCart(e) {
   //busco por id si algun producto tiene el valor del idbutton y lo guardo en una variable
   const productoAgregado = productosRopa.find(producto => producto.id == idButton);
 
-
   //verifico si el array tiene el elemento, si lo tiene sumo la cantidad (buscando por index), sino le asigno cant=1 y lo pusheo
   if (arrayCart.some(producto => producto.id == idButton)) {
-
     const index = arrayCart.findIndex(producto => producto.id == idButton)
     arrayCart[index].cantidad++;
-
   } else {
     productoAgregado.cantidad = 1;
     arrayCart.push(productoAgregado);
-
   }
 
   localStorage.setItem("products-in-cart", JSON.stringify(arrayCart));
+  
+  console.log('Producto agregado al localStorage:', arrayCart);
+  console.log('Ejecutando cartLocalStorage() después de agregar...');
 
   cartLocalStorage();
 
