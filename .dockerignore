@@ -1,0 +1,8 @@
+.gitignore
+
+Dockerfile
+.dockerignore
+
+README.md
+README.txt
+cambiosCss.txt
