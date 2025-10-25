@@ -551,7 +551,7 @@ html {
 }
 
 .footer .row a:hover {
-  color: #fff;
+  color: #000000;
 }
 
 .footer .row ul {
@@ -584,6 +584,245 @@ html {
 }
 
 /* <------------fin footer------------> */
+
+/* <------------inicio modal card------------> */
+.backdrop{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Usar rgba en lugar de opacity */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal cerrado por defecto */
+.modal {
+  display: none;
+}
+
+.contenido {
+  position: relative;
+  z-index: 1005;
+  background-color: white;
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  min-height: 500px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  /* CSS Grid Layout */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 20px;
+  grid-template-areas:
+    "imagen info"
+    "imagen detalles"
+    "imagen precio"
+    "descripcion descripcion"
+    "acciones acciones";
+}
+
+/* Grid Areas del Modal */
+.modal-image { 
+  grid-area: imagen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.modal-image img {
+  width: 80%;
+  height: 80%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.modal-info { 
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modal-detalles {
+  grid-area: detalles;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.container-talles{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.elemento-talle{
+  margin-top: 5px;
+  margin-bottom: 15px;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  display:flex;
+  justify-content: center;
+  width: 45px;
+}
+
+.modal-price { 
+  grid-area: precio;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2563eb;
+  margin-top: 30px
+}
+
+.modal-description { 
+  grid-area: descripcion;
+  padding: 15px 0;
+  line-height: 1.6;
+  color: #666;
+  border-top: 1px solid #eee;
+}
+
+.modal-actions { 
+  grid-area: acciones;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+/* Botones del modal */
+.modal-add-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-add-btn:hover {
+  background-color: #1d4ed8;
+}
+
+#dropModal {
+  background-color: #923232;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#dropModal:hover {
+  background-color: #4b5563;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+  .contenido {
+    width: 95%;
+    max-width: none;
+    padding: 15px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "imagen"
+      "info"
+      "detalles"
+      "precio"
+      "descripcion"
+      "acciones";
+  }
+  
+  .modal-image img {
+    max-height: 200px;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-add-btn, #dropModal {
+    width: 100%;
+  }
+}
+
+.descripcion { grid-area: descripcion; }
+
+.boton { grid-area: boton; }
+
+
+/* Modal abierto */
+.modal.open {
+  display: block;
+}
+
+#dropModal{
+  position:absolute;
+  top:10px;
+  right:10px;
+  cursor:pointer;
+}
+.btnModalClose{
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal.open .contenido {
+  animation: fadeIn 0.3s ease-out;
+}
+.modalProduct{
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  z-index: 1010;
+  position: relative;}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 
 /* ============= CSS CARRITO DE COMPRAS ============= */
 
@@ -628,7 +867,7 @@ html {
   display: grid;
   grid-template-columns: 80px 1fr 120px 120px 50px;  /* Columnas fijas */
   grid-template-areas: 
-    "imagen nombre cantidad precio eliminar";
+    "imagen nombre  precio cantidad eliminar";
   gap: 15px;
   align-items: center;
   padding: 0;
@@ -838,7 +1077,7 @@ html {
     grid-template-columns: 60px 1fr 80px 30px;
     grid-template-areas: 
       "imagen nombre precio eliminar"
-      "imagen cantidad precio eliminar";
+      "imagen precio cantidad  eliminar";
     gap: 10px;
   }
 

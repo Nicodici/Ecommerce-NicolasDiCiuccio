@@ -22,9 +22,8 @@ function cargarProductos(productos) {
   contenedorProductos.innerHTML = ``;
 
   // foreach para que recorra el array, por cada producto se va a renderizar una card
+
   productos.forEach(producto => {
-
-
     // primero creamos un div (document.createElement('div'), luego le agregamos la clase correspondiente (div.classList.add('clase'), despues el innerHTML
     const divProduct = document.createElement('div');
     divProduct.classList.add('product');
@@ -89,60 +88,60 @@ function handleEmptyCartClick(e) {
   e.preventDefault();
   console.log(e);
 
-    Toastify({
-      text: "⚠️ Agrega productos al carrito para continuar",
-      duration: 3000,
-      gravity: "top",
-      position: "center",
-      backgroundColor: "#ff6b6b",
-      className: "warning-toast",
-      stopOnFocus: true,
-    }).showToast();
-  
+  Toastify({
+    text: "⚠️ Agrega productos al carrito para continuar",
+    duration: 3000,
+    gravity: "top",
+    position: "center",
+    backgroundColor: "#ff6b6b",
+    className: "warning-toast",
+    stopOnFocus: true,
+  }).showToast();
+
   return false;
 }
 
 //funcion que verifica el local storage y actualiza el carrito.
 const cartLocalStorage = () => {
   const productsCart = JSON.parse(localStorage.getItem("products-in-cart"));
-  
+
   if (productsCart && productsCart.length > 0) {
     sumCartLst = productsCart.reduce((acc, product) => acc + product.cantidad, 0);
-    
+
     // Habilitar el nav-div del carrito
     cartLink.href = "carrito.html";
     navDiv.style.pointerEvents = "auto";
     navDiv.style.opacity = "1";
     navDiv.style.cursor = "pointer";
     navDiv.classList.remove("cart-disabled");
-    
+
     // IMPORTANTE: Remover todos los event listeners del carrito vacío
     cartLink.removeEventListener('click', handleEmptyCartClick);
     cartLink.onclick = null;
-    
+
     console.log('Carrito habilitado - productos encontrados:', sumCartLst);
   } else {
     sumCartLst = 0;
-    
+
     // Configurar carrito como vacío pero MANTENER eventos
     cartLink.href = "#";
     navDiv.style.opacity = "0.5";
     navDiv.style.cursor = "not-allowed";
     navDiv.classList.add("cart-disabled");
-    
+
     // NO bloquear pointer events para permitir el click
     navDiv.style.pointerEvents = "auto";
-    
+
     // Limpiar eventos previos antes de agregar nuevos
     cartLink.onclick = null;
     cartLink.removeEventListener('click', handleEmptyCartClick);
-    
+
     // Agregar nuevo event listener
     cartLink.addEventListener('click', handleEmptyCartClick);
-    
+
     console.log('Carrito deshabilitado - sin productos');
   }
-  
+
   console.log("cantidad de productos en el local storage", sumCartLst);
   numberCart.innerText = sumCartLst;
 };
@@ -168,7 +167,7 @@ function AddToCart(e) {
   }
 
   localStorage.setItem("products-in-cart", JSON.stringify(arrayCart));
-  
+
   console.log('Producto agregado al localStorage:', arrayCart);
   console.log('Ejecutando cartLocalStorage() después de agregar...');
 
@@ -184,3 +183,141 @@ function AddToCart(e) {
   }).showToast();
 
 };
+
+const buttonModal = document.getElementById("dropModal");
+const modal = document.querySelector(".modal");
+
+function openModal(producto) {
+  console.log('Se abre el modal para:', producto);
+
+  if (modal) {
+    modal.classList.add("open");
+    console.log('Modal abierto');
+
+    // Buscar el contenedor correcto (.contenido)
+    const contenidoModal = modal.querySelector('.contenido');
+
+    if (contenidoModal) {
+      // Estructura del modal usando CSS Grid areas
+      contenidoModal.innerHTML = `
+        <div class="modal-image">
+          <img src="${producto.imagen}" alt="${producto.nombre}">
+        </div>
+        
+        <div class="modal-info">
+          <h2 class="modal-title">${producto.nombre}</h2>
+        </div>
+        
+        <div class="modal-description">
+        ${producto.descripcion}
+        </div>
+        <div class="modal-detalles">
+        <div class="modal-talles">
+        <p> Talles disponibles: </p>
+        <div class="container-talles">
+        <div class="elemento-talle">S</div>
+        <div class="elemento-talle">M</div>
+        <div class="elemento-talle">L</div>
+        <div class="elemento-talle">XL</div>  
+        </div>
+        <div class="modal-price">
+        $${producto.precio.toLocaleString()}
+        </div>
+        </div>
+        
+        <div class="modal-actions">
+          <button class="modal-add-btn" data-id="${producto.id}">
+            Agregar al carrito
+          </button>
+          <button id="dropModal">X</button>
+        </div>
+      `;
+
+      // Agregar event listeners
+      const modalAddBtn = contenidoModal.querySelector('.modal-add-btn');
+      const closeBtn = contenidoModal.querySelector('#dropModal');
+
+      if (modalAddBtn) {
+        modalAddBtn.addEventListener('click', (e) => {
+          const productId = e.target.dataset.id;
+          const originalBtn = document.querySelector(`.productAddBtn[id="${productId}"]`);
+          if (originalBtn) {
+            originalBtn.click();
+            closeModal();
+          }
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          closeModal();
+        });
+      }
+
+    } else {
+      console.error('Contenido del modal no encontrado');
+    }
+  }
+
+}
+
+function closeModal() {
+  console.log("Se cierra el modal");
+
+  if (modal) {
+    modal.classList.remove("open");
+
+    // Limpiar el contenido del modal
+    const contenidoModal = modal.querySelector('.contenido');
+    if (contenidoModal) {
+      contenidoModal.innerHTML = `
+        <h2>modal de producto</h2>
+        <button id="dropModal">Cerrar</button>
+      `;
+
+      // Volver a agregar el event listener al botón cerrar
+      const newButtonModal = contenidoModal.querySelector('#dropModal');
+      if (newButtonModal) {
+        newButtonModal.addEventListener("click", (e) => {
+          console.log('Botón cerrar clickeado');
+          e.preventDefault();
+          e.stopPropagation();
+          closeModal();
+        });
+      }
+    }
+
+    console.log('Modal cerrado y limpiado');
+  } else {
+    console.error('Modal no encontrado para cerrar');
+  }
+}
+
+// Event listener para cerrar modal
+if (buttonModal) {
+  buttonModal.addEventListener("click", (e) => {
+    console.log('Botón cerrar clickeado');
+    e.preventDefault();
+    e.stopPropagation();
+    closeModal();
+  });
+  console.log('Event listener agregado al botón cerrar');
+}
+
+// Delegación de eventos para las cards (que se crean dinámicamente)
+contenedorProductos.addEventListener("click", (e) => {
+  // Verificar si el click fue en una card o dentro de una card
+  const card = e.target.closest(".card");
+
+  if (card) {
+    // Encontrar el producto correspondiente
+    const productDiv = card.closest(".product");
+    const productId = productDiv.querySelector(".productAddBtn").id;
+    const producto = productosRopa.find(p => p.id == productId);
+
+    console.log('Card clickeada, producto:', producto);
+    openModal(producto);
+  }
+});
