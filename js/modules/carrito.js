@@ -32,7 +32,7 @@ function renderCart(products) {
             <p class="product-quantity">Cant: ${product.cantidad}</p>
             <p class="product-price">$${product.precio.toLocaleString()}</p>
             <button class="delete-btn" id="${product.id}">
-                <img src="../assets/img/delete.png" alt="Eliminar">
+                <img src="/assets/img/delete.png" alt="Eliminar">
             </button>
         </div>
         `;

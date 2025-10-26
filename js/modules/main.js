@@ -7,8 +7,6 @@ const contenedorProductos = document.getElementById("cont-products");
 const botonesCategorias = document.querySelectorAll(".li-button");
 //elemento para modificar el titulo principal
 const tituloPrincipal = document.getElementById("tit-principal");
-//array con todos los elementos que tengan un selector llamado ".cart-button"
-let prodAgregar = document.querySelectorAll(".cart-button");
 const numberCart = document.querySelector("#number");
 let arrayCart = JSON.parse(localStorage.getItem("products-in-cart")) || [];
 const cartLink = document.querySelector("#cart-link");
@@ -27,7 +25,7 @@ function cargarProductos(productos) {
     // primero creamos un div (document.createElement('div'), luego le agregamos la clase correspondiente (div.classList.add('clase'), despues el innerHTML
     const divProduct = document.createElement('div');
     divProduct.classList.add('product');
-    divProduct.innerHTML = `<div class="card">
+    divProduct.innerHTML = `<div class="card" id="${producto.id}">
       <div class="image">
         <img class="image-product" src="${producto.imagen}" alt="${producto.nombre}">
       </div>
@@ -37,18 +35,13 @@ function cargarProductos(productos) {
         </div>
         <div class="price-container">
           <p class="price">$ ${producto.precio.toLocaleString()}</p>
-        </div>
-        <div class="button-container">
-          <button class="productAddBtn" id="${producto.id}">Agregar</button>
-        </div>
+          <p class="verMas">Ver más</p>
+          </div>
       </div>
-    </div>`
-
-    //insertamos el contenedor creado
+    </div>`;
     contenedorProductos.append(divProduct)
 
   });
-  actButtons();
 }
 
 cargarProductos(productosRopa);
@@ -71,15 +64,6 @@ botonesCategorias.forEach(button => {
   });
 
 });
-
-//funcion que va a actualizar los botones creados, ya que cuando actualizamos de categoria, los buttons viejos se borran y se crean nuevos
-//la funcion se llama al final de la function que carga los elementos
-function actButtons() {
-  prodAgregar = document.querySelectorAll(".productAddBtn")
-  prodAgregar.forEach(button => {
-    button.addEventListener("click", AddToCart)
-  })
-}
 
 let sumCartLst = 0;
 
@@ -149,11 +133,9 @@ const cartLocalStorage = () => {
 cartLocalStorage();
 
 function AddToCart(e) {
-
-  //en la variable idButton le asigno el id del boton "Agregar" correspondiente.
-  const idButton = e.currentTarget.id;
+  console.log("info de la card clickeada",e.target);
+  const idButton = e.currentTarget.dataset.id;
   console.log("id del boton", idButton);
-
   //busco por id si algun producto tiene el valor del idbutton y lo guardo en una variable
   const productoAgregado = productosRopa.find(producto => producto.id == idButton);
 
@@ -239,12 +221,8 @@ function openModal(producto) {
 
       if (modalAddBtn) {
         modalAddBtn.addEventListener('click', (e) => {
-          const productId = e.target.dataset.id;
-          const originalBtn = document.querySelector(`.productAddBtn[id="${productId}"]`);
-          if (originalBtn) {
-            originalBtn.click();
-            closeModal();
-          }
+          AddToCart(e);
+          closeModal();
         });
       }
 
@@ -256,15 +234,12 @@ function openModal(producto) {
         });
       }
 
-    } else {
-      console.error('Contenido del modal no encontrado');
     }
   }
 
 }
 
 function closeModal() {
-  console.log("Se cierra el modal");
 
   if (modal) {
     modal.classList.remove("open");
@@ -310,14 +285,14 @@ if (buttonModal) {
 contenedorProductos.addEventListener("click", (e) => {
   // Verificar si el click fue en una card o dentro de una card
   const card = e.target.closest(".card");
-
+  console.log(card)
+  const id = card.id;
   if (card) {
-    // Encontrar el producto correspondiente
-    const productDiv = card.closest(".product");
-    const productId = productDiv.querySelector(".productAddBtn").id;
-    const producto = productosRopa.find(p => p.id == productId);
+    const producto = productosRopa.find(p => p.id == id);
 
     console.log('Card clickeada, producto:', producto);
     openModal(producto);
   }
 });
+
+const cardModal = document.querySelectorAll(".modal-add-btn");

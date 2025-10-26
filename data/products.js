@@ -260,6 +260,342 @@ const productosRopa = [
     cantidad: 43,
     descripcion: "Zapatillas premium de lujo con materiales de la más alta calidad, artesanía excepcional y diseño exclusivo. La elección perfecta para los más exigentes."
   },
+  // PRODUCTOS ADICIONALES PARA COMPLETAR 10 EN CADA CATEGORÍA
+  // Camisetas adicionales (ya tiene 4, agregar 6 más)
+  {
+    id: 31,
+    nombre: "Camiseta Deportiva",
+    categoria: { id: "Camisetas", nombre: "Camisetas" },
+    precio: 28000,
+    imagen: "..//assets/img/camiseta-deportiva.jpg",
+    cantidad: 45,
+    descripcion: "Camiseta deportiva de material transpirable, ideal para entrenamientos y actividad física. Tecnología de secado rápido para máximo confort."
+  },
+  {
+    id: 32,
+    nombre: "Camiseta Vintage",
+    categoria: { id: "Camisetas", nombre: "Camisetas" },
+    precio: 35000,
+    imagen: "..//assets/img/camiseta-vintage.jpg",
+    cantidad: 22,
+    descripcion: "Camiseta con diseño vintage retro, estilo clásico que nunca pasa de moda. Perfecta para looks casuales con toque nostálgico."
+  },
+  {
+    id: 33,
+    nombre: "Camiseta Estampada",
+    categoria: { id: "Camisetas", nombre: "Camisetas" },
+    precio: 32000,
+    imagen: "..//assets/img/camiseta-estampada.jpg",
+    cantidad: 38,
+    descripcion: "Camiseta con estampado original y colorido, diseño único que refleja tu personalidad. Ideal para destacar en cualquier ocasión."
+  },
+  {
+    id: 34,
+    nombre: "Camiseta Polo",
+    categoria: { id: "Camisetas", nombre: "Camisetas" },
+    precio: 42000,
+    imagen: "..//assets/img/camiseta-polo.jpg",
+    cantidad: 31,
+    descripcion: "Camiseta polo clásica de corte elegante, versatilidad entre casual y formal. Perfecta para reuniones y eventos semiformales."
+  },
+  {
+    id: 35,
+    nombre: "Camiseta Oversize",
+    categoria: { id: "Camisetas", nombre: "Camisetas" },
+    precio: 38000,
+    imagen: "..//assets/img/camiseta-oversize.jpg",
+    cantidad: 27,
+    descripcion: "Camiseta oversize de corte amplio y moderno, tendencia urbana actual. Comodidad y estilo en una prenda versátil."
+  },
+  {
+    id: 36,
+    nombre: "Camiseta Premium",
+    categoria: { id: "Camisetas", nombre: "Camisetas" },
+    precio: 55000,
+    imagen: "..//assets/img/camiseta-premium.jpg",
+    cantidad: 19,
+    descripcion: "Camiseta premium de algodón pima, calidad excepcional y acabados perfectos. Suavidad y durabilidad en una prenda de lujo."
+  },
+  
+  // Pantalones adicionales (ya tiene 3, agregar 7 más)
+  {
+    id: 37,
+    nombre: "Pantalón Chino",
+    categoria: { id: "Pantalones", nombre: "Pantalones" },
+    precio: 52000,
+    imagen: "..//assets/img/pantalon-chino.jpg",
+    cantidad: 41,
+    descripcion: "Pantalón chino de corte moderno y tela suave, versatilidad entre casual y elegante. Perfecto para múltiples ocasiones."
+  },
+  {
+    id: 38,
+    nombre: "Pantalón Jogger",
+    categoria: { id: "Pantalones", nombre: "Pantalones" },
+    precio: 45000,
+    imagen: "..//assets/img/pantalon-jogger.jpg",
+    cantidad: 36,
+    descripcion: "Pantalón jogger cómodo y moderno, ideal para tiempo libre y actividades relajadas. Estilo urbano con máximo confort."
+  },
+  {
+    id: 39,
+    nombre: "Pantalón Cargo",
+    categoria: { id: "Pantalones", nombre: "Pantalones" },
+    precio: 58000,
+    imagen: "..//assets/img/pantalon-cargo.jpg",
+    cantidad: 29,
+    descripcion: "Pantalón cargo con múltiples bolsillos, funcionalidad y estilo militar. Resistente y práctico para uso diario."
+  },
+  {
+    id: 40,
+    nombre: "Pantalón Formal",
+    categoria: { id: "Pantalones", nombre: "Pantalones" },
+    precio: 65000,
+    imagen: "..//assets/img/pantalon-formal.jpg",
+    cantidad: 24,
+    descripcion: "Pantalón formal de vestir, elegancia y sofisticación para eventos especiales. Corte impecable y tela de primera calidad."
+  },
+  {
+    id: 41,
+    nombre: "Pantalón Deportivo",
+    categoria: { id: "Pantalones", nombre: "Pantalones" },
+    precio: 38000,
+    imagen: "..//assets/img/pantalon-deportivo.jpg",
+    cantidad: 52,
+    descripcion: "Pantalón deportivo de material transpirable, perfecto para entrenamientos y actividades físicas. Libertad de movimiento garantizada."
+  },
+  {
+    id: 42,
+    nombre: "Pantalón Slim",
+    categoria: { id: "Pantalones", nombre: "Pantalones" },
+    precio: 48000,
+    imagen: "..//assets/img/pantalon-slim.jpg",
+    cantidad: 33,
+    descripcion: "Pantalón slim fit de corte entallado, silueta moderna y estilizada. Perfecto para looks contemporáneos y elegantes."
+  },
+  {
+    id: 43,
+    nombre: "Pantalón Palazzo",
+    categoria: { id: "Pantalones", nombre: "Pantalones" },
+    precio: 55000,
+    imagen: "..//assets/img/pantalon-palazzo.jpg",
+    cantidad: 26,
+    descripcion: "Pantalón palazzo de corte amplio y fluido, comodidad y elegancia femenina. Ideal para ocasiones especiales y verano."
+  },
+  
+  // Remeras adicionales (ya tiene 3, agregar 7 más)
+  {
+    id: 44,
+    nombre: "Remera Básica Blanca",
+    categoria: { id: "Remeras", nombre: "Remeras" },
+    precio: 22000,
+    imagen: "..//assets/img/remera-basica-blanca.jpg",
+    cantidad: 60,
+    descripcion: "Remera básica blanca de algodón, esencial en todo guardarropa. Versatilidad absoluta para combinar con cualquier prenda."
+  },
+  {
+    id: 45,
+    nombre: "Remera Estampada Rock",
+    categoria: { id: "Remeras", nombre: "Remeras" },
+    precio: 35000,
+    imagen: "..//assets/img/remera-rock.jpg",
+    cantidad: 28,
+    descripcion: "Remera con estampado de banda de rock, estilo rebelde y auténtico. Perfecta para expresar tu pasión por la música."
+  },
+  {
+    id: 46,
+    nombre: "Remera Manga Larga",
+    categoria: { id: "Remeras", nombre: "Remeras" },
+    precio: 32000,
+    imagen: "..//assets/img/remera-manga-larga.jpg",
+    cantidad: 42,
+    descripcion: "Remera de manga larga en algodón suave, perfecta para entretiempo. Comodidad y protección en una prenda versátil."
+  },
+  {
+    id: 47,
+    nombre: "Remera Deportiva Mujer",
+    categoria: { id: "Remeras", nombre: "Remeras" },
+    precio: 29000,
+    imagen: "..//assets/img/remera-deportiva-mujer.jpg",
+    cantidad: 37,
+    descripcion: "Remera deportiva femenina de material técnico, ideal para yoga y fitness. Transpirable y con ajuste perfecto."
+  },
+  {
+    id: 48,
+    nombre: "Remera Crop Top",
+    categoria: { id: "Remeras", nombre: "Remeras" },
+    precio: 26000,
+    imagen: "..//assets/img/remera-crop.jpg",
+    cantidad: 34,
+    descripcion: "Remera crop top moderna y juvenil, tendencia actual en moda femenina. Perfecta para looks frescos y modernos."
+  },
+  {
+    id: 49,
+    nombre: "Remera Tie Dye",
+    categoria: { id: "Remeras", nombre: "Remeras" },
+    precio: 38000,
+    imagen: "..//assets/img/remera-tie-dye.jpg",
+    cantidad: 25,
+    descripcion: "Remera con diseño tie dye colorido, estilo bohemio y artístico. Única y especial, cada prenda es diferente."
+  },
+  {
+    id: 50,
+    nombre: "Remera Técnica",
+    categoria: { id: "Remeras", nombre: "Remeras" },
+    precio: 45000,
+    imagen: "..//assets/img/remera-tecnica.jpg",
+    cantidad: 31,
+    descripcion: "Remera técnica de alto rendimiento, tecnología avanzada para deportistas. Secado rápido y control de temperatura."
+  },
+  
+  // Vestidos adicionales (ya tiene 3, agregar 7 más)
+  {
+    id: 51,
+    nombre: "Vestido Casual",
+    categoria: { id: "Vestidos", nombre: "Vestidos" },
+    precio: 48000,
+    imagen: "..//assets/img/vestido-casual.jpg",
+    cantidad: 35,
+    descripcion: "Vestido casual cómodo y versátil, perfecto para el día a día. Estilo relajado con toque femenino y elegante."
+  },
+  {
+    id: 52,
+    nombre: "Vestido de Noche",
+    categoria: { id: "Vestidos", nombre: "Vestidos" },
+    precio: 85000,
+    imagen: "..//assets/img/vestido-noche.jpg",
+    cantidad: 18,
+    descripcion: "Vestido de noche elegante y sofisticado, perfecto para eventos especiales. Diseño glamoroso que te hará brillar."
+  },
+  {
+    id: 53,
+    nombre: "Vestido Maxi",
+    categoria: { id: "Vestidos", nombre: "Vestidos" },
+    precio: 62000,
+    imagen: "..//assets/img/vestido-maxi.jpg",
+    cantidad: 27,
+    descripcion: "Vestido maxi largo y fluido, elegancia bohemia para cualquier ocasión. Comodidad y estilo en una prenda única."
+  },
+  {
+    id: 54,
+    nombre: "Vestido Midi",
+    categoria: { id: "Vestidos", nombre: "Vestidos" },
+    precio: 55000,
+    imagen: "..//assets/img/vestido-midi.jpg",
+    cantidad: 32,
+    descripcion: "Vestido midi de largo medio, versatilidad perfecta entre casual y formal. Ideal para oficina y eventos sociales."
+  },
+  {
+    id: 55,
+    nombre: "Vestido Floral",
+    categoria: { id: "Vestidos", nombre: "Vestidos" },
+    precio: 52000,
+    imagen: "..//assets/img/vestido-floral.jpg",
+    cantidad: 29,
+    descripcion: "Vestido con estampado floral romántico, feminidad y delicadeza en cada detalle. Perfecto para primavera y verano."
+  },
+  {
+    id: 56,
+    nombre: "Vestido Cóctel",
+    categoria: { id: "Vestidos", nombre: "Vestidos" },
+    precio: 72000,
+    imagen: "..//assets/img/vestido-coctel.jpg",
+    cantidad: 21,
+    descripcion: "Vestido cóctel elegante para eventos especiales, sofisticación y glamour. Diseño que te hará destacar en cualquier fiesta."
+  },
+  {
+    id: 57,
+    nombre: "Vestido Bohemio",
+    categoria: { id: "Vestidos", nombre: "Vestidos" },
+    precio: 58000,
+    imagen: "..//assets/img/vestido-bohemio.jpg",
+    cantidad: 24,
+    descripcion: "Vestido bohemio con detalles únicos, estilo libre y artístico. Perfecto para expresar tu personalidad creativa."
+  },
+  
+  // Chaquetas adicionales (ya tiene 3, agregar 7 más)
+  {
+    id: 58,
+    nombre: "Chaqueta Bomber",
+    categoria: { id: "Chaquetas", nombre: "Chaquetas" },
+    precio: 68000,
+    imagen: "..//assets/img/chaqueta-bomber.jpg",
+    cantidad: 28,
+    descripcion: "Chaqueta bomber urbana y moderna, estilo street wear contemporáneo. Perfecta para looks casuales con actitud."
+  },
+  {
+    id: 59,
+    nombre: "Chaqueta Blazer",
+    categoria: { id: "Chaquetas", nombre: "Chaquetas" },
+    precio: 85000,
+    imagen: "..//assets/img/chaqueta-blazer.jpg",
+    cantidad: 22,
+    descripcion: "Chaqueta blazer elegante y versátil, profesionalismo y sofisticación. Ideal para oficina y eventos formales."
+  },
+  {
+    id: 60,
+    nombre: "Chaqueta Deportiva",
+    categoria: { id: "Chaquetas", nombre: "Chaquetas" },
+    precio: 58000,
+    imagen: "..//assets/img/chaqueta-deportiva.jpg",
+    cantidad: 35,
+    descripcion: "Chaqueta deportiva funcional y cómoda, perfecta para entrenamientos y actividades al aire libre. Resistente y práctica."
+  },
+  {
+    id: 61,
+    nombre: "Chaqueta de Cuero",
+    categoria: { id: "Chaquetas", nombre: "Chaquetas" },
+    precio: 120000,
+    imagen: "..//assets/img/chaqueta-cuero.jpg",
+    cantidad: 15,
+    descripcion: "Chaqueta de cuero genuino, estilo clásico y rebelde. Durabilidad y carácter en una prenda icónica e imperecedera."
+  },
+  {
+    id: 62,
+    nombre: "Chaqueta Parka",
+    categoria: { id: "Chaquetas", nombre: "Chaquetas" },
+    precio: 95000,
+    imagen: "..//assets/img/chaqueta-parka.jpg",
+    cantidad: 19,
+    descripcion: "Chaqueta parka con capucha, protección total contra el frío y la lluvia. Funcionalidad y estilo para días adversos."
+  },
+  {
+    id: 63,
+    nombre: "Chaqueta Denim",
+    categoria: { id: "Chaquetas", nombre: "Chaquetas" },
+    precio: 62000,
+    imagen: "..//assets/img/chaqueta-denim.jpg",
+    cantidad: 33,
+    descripcion: "Chaqueta de mezclilla clásica, versatilidad atemporal que nunca pasa de moda. Perfecta para looks casuales y urbanos."
+  },
+  {
+    id: 64,
+    nombre: "Chaqueta Impermeable",
+    categoria: { id: "Chaquetas", nombre: "Chaquetas" },
+    precio: 72000,
+    imagen: "..//assets/img/chaqueta-impermeable.jpg",
+    cantidad: 26,
+    descripcion: "Chaqueta impermeable técnica, protección avanzada contra lluvia y viento. Ideal para actividades outdoor y clima adverso."
+  },
+  
+  // Zapatillas adicionales (ya tiene 8, agregar 2 más)
+  {
+    id: 65,
+    nombre: "Zapatillas Running",
+    categoria: { id: "Zapatillas", nombre: "Zapatillas" },
+    precio: 75000,
+    imagen: "..//assets/img/zapatillas-running.jpg",
+    cantidad: 41,
+    descripcion: "Zapatillas especializadas para running, tecnología avanzada de amortiguación. Perfectas para corredores exigentes y entrenamientos intensos."
+  },
+  {
+    id: 66,
+    nombre: "Zapatillas Casual",
+    categoria: { id: "Zapatillas", nombre: "Zapatillas" },
+    precio: 52000,
+    imagen: "..//assets/img/zapatillas-casual.jpg",
+    cantidad: 38,
+    descripcion: "Zapatillas casuales versátiles y cómodas, perfectas para uso diario. Estilo relajado que combina con cualquier outfit informal."
+  }
 ];
 
 export { productosRopa };

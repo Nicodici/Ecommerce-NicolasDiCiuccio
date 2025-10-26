@@ -1,0 +1,165 @@
+# Guía completa: Configuración de rutas para Live-server y Docker
+
+## 📋 Problema original
+El proyecto tenía problemas de rutas que funcionaban en live-server pero no en Docker, o viceversa. El modal no funcionaba correctamente en el contenedor Docker debido a rutas incorrectas.
+
+## ✅ Solución implementada: Rutas absolutas universales
+
+### 🔧 Cambios realizados:
+
+#### 1. **Archivos HTML** (`public/index.html` y `public/carrito.html`)
+```html
+<!-- ANTES (rutas relativas problemáticas) -->
+<link rel="stylesheet" href="../assets/css/style.css">
+<script type="module" src="../js/modules/main.js"></script>
+
+<!-- DESPUÉS (rutas absolutas) -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="module" src="/js/modules/main.js"></script>
+```
+
+#### 2. **JavaScript** (`js/modules/main.js`)
+```javascript
+// ANTES (ruta relativa problemática)
+import { productosRopa } from "../../data/products.js";
+
+// DESPUÉS (ruta absoluta)
+import { productosRopa } from "/data/products.js";
+```
+
+#### 3. **Carrito.js** (`js/modules/carrito.js`)
+```javascript
+// ANTES
+<img src="../assets/img/delete.png" alt="Eliminar">
+
+// DESPUÉS
+<img src="/assets/img/delete.png" alt="Eliminar">
+```
+
+## 🗂️ Estructura final del proyecto:
+```
+Ecommerce-NicolasDiCiuccio/
+├── public/
+│   ├── index.html (usa /assets/css/style.css, /js/modules/main.js)
+│   └── carrito.html (usa /assets/css/style.css, /js/modules/carrito.js)
+├── js/modules/
+│   ├── main.js (usa /data/products.js)
+│   └── carrito.js (usa /assets/img/delete.png)
+├── data/
+│   └── products.js
+├── assets/
+│   ├── css/style.css
+│   └── img/delete.png
+├── server.js (servidor Node.js para desarrollo)
+├── package.json (scripts para desarrollo y Docker)
+└── Dockerfile (configuración para producción)
+```
+
+## 🚀 Cómo usar cada entorno:
+
+### 🟢 **Desarrollo local con Node.js**
+```bash
+# Ejecutar servidor de desarrollo
+node server.js
+# O usando npm
+npm run dev
+
+# Acceder en: http://localhost:3000
+```
+
+### 🐳 **Producción con Docker**
+```bash
+# Construir imagen
+docker build -t ecommerce:nginx .
+# O usando npm
+npm run docker:build
+
+# Ejecutar contenedor
+docker run -d -p 8080:80 --name ecommerce-app ecommerce:nginx
+# O usando npm
+npm run docker:run
+
+# Acceder en: http://localhost:8080
+```
+
+### 📜 **Scripts de package.json disponibles:**
+```json
+{
+  "scripts": {
+    "dev": "node server.js",
+    "docker:build": "docker build -t ecommerce:nginx .",
+    "docker:run": "docker run -d -p 8080:80 --name ecommerce-app ecommerce:nginx",
+    "docker:stop": "docker stop ecommerce-app && docker rm ecommerce-app",
+    "docker:restart": "npm run docker:stop && npm run docker:build && npm run docker:run"
+  }
+}
+```
+
+## 🎯 **Por qué funciona esta solución:**
+
+### **En Docker (Nginx):**
+- Los archivos se copian a `/usr/share/nginx/html/`
+- Las rutas absolutas (`/assets/css/style.css`) se resuelven desde la raíz del servidor
+- Estructura: `/usr/share/nginx/html/assets/css/style.css`
+
+### **En desarrollo (Node.js server.js):**
+- El servidor maneja las rutas absolutas correctamente
+- Sirve archivos desde la raíz del proyecto
+- Mapea `/assets/css/style.css` a `./assets/css/style.css`
+
+## ✅ **Beneficios de esta implementación:**
+
+1. **Una sola configuración** para ambos entornos
+2. **Rutas absolutas consistentes** sin cambios manuales
+3. **Modal funcionando** correctamente en ambos casos
+4. **Fácil desarrollo** con servidor Node.js
+5. **Producción optimizada** con Docker + Nginx
+6. **Scripts automatizados** para facilitar el workflow
+
+## 🔧 **Comandos útiles:**
+
+### **Gestión de Docker:**
+```bash
+# Ver contenedores corriendo
+docker ps
+
+# Detener contenedor
+docker stop ecommerce-app
+
+# Eliminar contenedor
+docker rm ecommerce-app
+
+# Ver logs del contenedor
+docker logs ecommerce-app
+
+# Reiniciar completamente
+npm run docker:restart
+```
+
+### **Desarrollo:**
+```bash
+# Iniciar servidor de desarrollo
+npm run dev
+
+# El servidor se reinicia automáticamente con cambios
+# Acceder a http://localhost:3000
+```
+
+## 🚨 **Notas importantes:**
+
+1. **Siempre usar rutas absolutas** que empiecen con `/`
+2. **No mezclar rutas relativas** (`../`) con absolutas (`/`)
+3. **Probar en ambos entornos** antes de hacer commit
+4. **El servidor Node.js es solo para desarrollo**, usar Docker para producción
+5. **Si cambias rutas**, reconstruir la imagen Docker con `npm run docker:restart`
+
+## 📝 **Para recordar:**
+- ✅ Rutas absolutas (`/assets/css/style.css`)
+- ❌ Rutas relativas (`../assets/css/style.css`)
+- 🔄 Un setup, dos entornos
+- 🎯 Modal funcionando en ambos casos
+
+---
+**Fecha de creación:** 25 de octubre de 2025
+**Proyecto:** Ecommerce-NicolasDiCiuccio
+**Autor:** Nicodici
