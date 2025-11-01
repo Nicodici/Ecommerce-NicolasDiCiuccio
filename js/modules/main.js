@@ -2,22 +2,29 @@ import { productosRopa } from "../../data/products.js";
 
 // <<<<<<<<<<<<<QuerySelectors>>>>>>>>>>>
 //llamo al id del contenedor principal del index para manipular el doom
-const contenedorProductos = document.getElementById("cont-products");
+const containerProducts = document.getElementById("cont-products");
 // array con todos los elementos de los selectores que tengan una clase ".li-button" 
-const botonesCategorias = document.querySelectorAll(".li-button");
+const btnCategories = document.querySelectorAll(".li-button");
 //elemento para modificar el titulo principal
 const tituloPrincipal = document.getElementById("tit-principal");
+//evitar hardcodeo
+const colectionText = "Colección 2025"
+//numero del carrito
 const numberCart = document.querySelector("#number");
+//carrito del localStorage
 let arrayCart = JSON.parse(localStorage.getItem("products-in-cart")) || [];
 const cartLink = document.querySelector("#cart-link");
-const navDiv = document.querySelector(".nav-div:last-child"); // Selector correcto para el nav-div del carrito
+// Selector correcto para el nav-div del carrito
+const navDiv = document.querySelector(".nav-div:last-child");
+const containerSpinner = document.getElementById("containerSpinner")
 // <<<<<<<<<<<<<QuerySelectors>>>>>>>>>>>
 
 
-function cargarProductos(productos) {
+
+function loadProducts(productos) {
 
   //antes de renderizar cada producto, vaciamos el contenedor 
-  contenedorProductos.innerHTML = ``;
+  containerProducts.innerHTML = ``;
 
   // foreach para que recorra el array, por cada producto se va a renderizar una card
 
@@ -39,27 +46,56 @@ function cargarProductos(productos) {
           </div>
       </div>
     </div>`;
-    contenedorProductos.append(divProduct)
+    containerProducts.append(divProduct)
 
   });
 }
 
-cargarProductos(productosRopa);
+loadProducts(productosRopa);
 
 let prodFilters = [];
 
 //filtro por categorias
-botonesCategorias.forEach(button => {
-  button.addEventListener('click', (e) => {
+btnCategories.forEach(button => {
 
-    if (e.currentTarget.id === "filterAll") {
-      prodFilters = productosRopa;
-      tituloPrincipal.innerHTML = "Todos nuestros productos";
-    } else {
-      prodFilters = productosRopa.filter(producto => producto.categoria.id.toLowerCase() === e.currentTarget.id);
-      tituloPrincipal.innerHTML = prodFilters[0].categoria.nombre; // muestra el nombre de la primera categoría del filtro
-    }
-    cargarProductos(prodFilters);
+  button.addEventListener('click', (e) => {
+    // Capturar el evento antes del setTimeout
+    const clickedButton = e.currentTarget;
+
+    // Mostrar spinner inmediatamente
+    showSpinner(containerProducts, containerSpinner, tituloPrincipal);
+
+    // Deshabilitar todos los botones durante la carga
+    btnCategories.forEach(btn => btn.disabled = true);
+
+    // Ejecutar después de 1 segundo
+    setTimeout(() => {
+      try {
+        if (clickedButton.id === "filterAll") {
+          prodFilters = productosRopa;
+          tituloPrincipal.innerHTML = `${colectionText}`;
+        } else {
+          prodFilters = productosRopa.filter(producto => producto.categoria.id.toLowerCase() === clickedButton.id);
+          tituloPrincipal.innerHTML = prodFilters[0].categoria.nombre; // muestra el nombre de la primera categoría del filtro
+        }
+
+        // Ocultar spinner
+        closeSpinner(containerSpinner, tituloPrincipal);
+        // Cargar productos
+        loadProducts(prodFilters);
+
+
+        // Rehabilitar todos los botones
+        btnCategories.forEach(btn => btn.disabled = false);
+
+      } catch (error) {
+        console.error('Error al filtrar productos:', error);
+        // Ocultar spinner en caso de error
+        closeSpinner(containerSpinner, tituloPrincipal);
+        // Rehabilitar botones en caso de error
+        btnCategories.forEach(btn => btn.disabled = false);
+      }
+    }, 1000); // 1 segundo de delay
 
   });
 
@@ -133,7 +169,7 @@ const cartLocalStorage = () => {
 cartLocalStorage();
 
 function AddToCart(e) {
-  console.log("info de la card clickeada",e.target);
+  console.log("info de la card clickeada", e.target);
   const idButton = e.currentTarget.dataset.id;
   console.log("id del boton", idButton);
   //busco por id si algun producto tiene el valor del idbutton y lo guardo en una variable
@@ -282,7 +318,7 @@ if (buttonModal) {
 }
 
 // Delegación de eventos para las cards (que se crean dinámicamente)
-contenedorProductos.addEventListener("click", (e) => {
+containerProducts.addEventListener("click", (e) => {
   // Verificar si el click fue en una card o dentro de una card
   const card = e.target.closest(".card");
   console.log(card)
@@ -295,4 +331,42 @@ contenedorProductos.addEventListener("click", (e) => {
   }
 });
 
-const cardModal = document.querySelectorAll(".modal-add-btn");
+const inputSearch = document.getElementById("input");
+
+inputSearch.addEventListener("keyup", (e) => {
+  console.log('Palabra Ingresada: ', e.target.value);
+  if (e.target.value.length == 0) {
+    tituloPrincipal.innerText = `${colectionText}`;
+    loadProducts(productosRopa);
+  }
+  if (e.target.value.length > 1) {
+    tituloPrincipal.innerText = "Busqueda personalizada"
+    const result = liveSearch(productosRopa, e.target.value);
+    if (result.length == 0) {
+
+      containerProducts.innerText = "No existen coincidencias con el término buscado."
+      return;
+    }
+    loadProducts(result);
+  }
+})
+
+function liveSearch(productos, search) {
+  if (!search.trim()) return productos;
+
+  const searchLower = search.toLowerCase();
+  const result = productos.filter(p => p.nombre.toLowerCase().includes(searchLower))
+  console.log("resultado:", result);
+  return result;
+}
+
+function showSpinner(containerProducts, containerSpinner, tituloPrincipal) {
+  containerProducts.innerText = "";
+  containerSpinner.style.display = "flex";
+  tituloPrincipal.style.display = "none";
+}
+
+function closeSpinner(containerSpinner, tituloPrincipal) {
+  containerSpinner.style.display = "none";
+  tituloPrincipal.style.display = "flex";
+}

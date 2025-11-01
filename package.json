@@ -4,7 +4,7 @@
   "description": "Ecommerce project that works with both Node.js server and Docker",
   "main": "server.js",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node --watch server.js",
     "docker:build": "docker build -t ecommerce:nginx .",
     "docker:run": "docker run -d -p 8080:80 --name ecommerce-app ecommerce:nginx",
     "docker:stop": "docker stop ecommerce-app && docker rm ecommerce-app",
