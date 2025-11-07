@@ -1,12 +1,13 @@
 import { productosRopa } from "../../data/products.js";
-
+import { showSpinner, closeSpinner } from '../utils/spinner.js';
+import {handleEmptyCartClick} from '../utils/cartEmpty.js'
 // <<<<<<<<<<<<<QuerySelectors>>>>>>>>>>>
 //llamo al id del contenedor principal del index para manipular el doom
 const containerProducts = document.getElementById("cont-products");
 // array con todos los elementos de los selectores que tengan una clase ".li-button" 
 const btnCategories = document.querySelectorAll(".li-button");
 //elemento para modificar el titulo principal
-const tituloPrincipal = document.getElementById("tit-principal");
+const titleMajor = document.getElementById("tit-principal");
 //evitar hardcodeo
 const colectionText = "Colección 2025"
 //numero del carrito
@@ -20,7 +21,7 @@ const containerSpinner = document.getElementById("containerSpinner")
 // <<<<<<<<<<<<<QuerySelectors>>>>>>>>>>>
 
 
-
+//Funcion que carga los productos
 function loadProducts(productos) {
 
   //antes de renderizar cada producto, vaciamos el contenedor 
@@ -63,7 +64,7 @@ btnCategories.forEach(button => {
     const clickedButton = e.currentTarget;
 
     // Mostrar spinner inmediatamente
-    showSpinner(containerProducts, containerSpinner, tituloPrincipal);
+    showSpinner(containerProducts, containerSpinner, titleMajor);
 
     // Deshabilitar todos los botones durante la carga
     btnCategories.forEach(btn => btn.disabled = true);
@@ -73,14 +74,14 @@ btnCategories.forEach(button => {
       try {
         if (clickedButton.id === "filterAll") {
           prodFilters = productosRopa;
-          tituloPrincipal.innerHTML = `${colectionText}`;
+          titleMajor.innerHTML = `${colectionText}`;
         } else {
           prodFilters = productosRopa.filter(producto => producto.categoria.id.toLowerCase() === clickedButton.id);
-          tituloPrincipal.innerHTML = prodFilters[0].categoria.nombre; // muestra el nombre de la primera categoría del filtro
+          titleMajor.innerHTML = prodFilters[0].categoria.nombre; // muestra el nombre de la primera categoría del filtro
         }
 
         // Ocultar spinner
-        closeSpinner(containerSpinner, tituloPrincipal);
+        closeSpinner(containerSpinner, titleMajor);
         // Cargar productos
         loadProducts(prodFilters);
 
@@ -91,11 +92,11 @@ btnCategories.forEach(button => {
       } catch (error) {
         console.error('Error al filtrar productos:', error);
         // Ocultar spinner en caso de error
-        closeSpinner(containerSpinner, tituloPrincipal);
+        closeSpinner(containerSpinner, titleMajor);
         // Rehabilitar botones en caso de error
         btnCategories.forEach(btn => btn.disabled = false);
       }
-    }, 1000); // 1 segundo de delay
+    }, 1100); // 1 segundo de delay
 
   });
 
@@ -103,23 +104,6 @@ btnCategories.forEach(button => {
 
 let sumCartLst = 0;
 
-// Función para manejar click en carrito vacío
-function handleEmptyCartClick(e) {
-  e.preventDefault();
-  console.log(e);
-
-  Toastify({
-    text: "⚠️ Agrega productos al carrito para continuar",
-    duration: 3000,
-    gravity: "top",
-    position: "center",
-    backgroundColor: "#ff6b6b",
-    className: "warning-toast",
-    stopOnFocus: true,
-  }).showToast();
-
-  return false;
-}
 
 //funcion que verifica el local storage y actualiza el carrito.
 const cartLocalStorage = () => {
@@ -168,6 +152,7 @@ const cartLocalStorage = () => {
 
 cartLocalStorage();
 
+//Funcion que agrega un producto al carrito
 function AddToCart(e) {
   console.log("info de la card clickeada", e.target);
   const idButton = e.currentTarget.dataset.id;
@@ -205,19 +190,17 @@ function AddToCart(e) {
 const buttonModal = document.getElementById("dropModal");
 const modal = document.querySelector(".modal");
 
+//Funcion que abre el modal
 function openModal(producto) {
-  console.log('Se abre el modal para:', producto);
-
   if (modal) {
     modal.classList.add("open");
-    console.log('Modal abierto');
 
     // Buscar el contenedor correcto (.contenido)
-    const contenidoModal = modal.querySelector('.contenido');
+    const contentModal = modal.querySelector('.contenido');
 
-    if (contenidoModal) {
+    if (contentModal) {
       // Estructura del modal usando CSS Grid areas
-      contenidoModal.innerHTML = `
+      contentModal.innerHTML = `
         <div class="modal-image">
           <img src="${producto.imagen}" alt="${producto.nombre}">
         </div>
@@ -252,8 +235,8 @@ function openModal(producto) {
       `;
 
       // Agregar event listeners
-      const modalAddBtn = contenidoModal.querySelector('.modal-add-btn');
-      const closeBtn = contenidoModal.querySelector('#dropModal');
+      const modalAddBtn = contentModal.querySelector('.modal-add-btn');
+      const closeBtn = contentModal.querySelector('#dropModal');
 
       if (modalAddBtn) {
         modalAddBtn.addEventListener('click', (e) => {
@@ -275,21 +258,22 @@ function openModal(producto) {
 
 }
 
+//Funcion que cierra el modal
 function closeModal() {
 
   if (modal) {
     modal.classList.remove("open");
 
     // Limpiar el contenido del modal
-    const contenidoModal = modal.querySelector('.contenido');
-    if (contenidoModal) {
-      contenidoModal.innerHTML = `
+    const contentModal = modal.querySelector('.contenido');
+    if (contentModal) {
+      contentModal.innerHTML = `
         <h2>modal de producto</h2>
         <button id="dropModal">Cerrar</button>
       `;
 
       // Volver a agregar el event listener al botón cerrar
-      const newButtonModal = contenidoModal.querySelector('#dropModal');
+      const newButtonModal = contentModal.querySelector('#dropModal');
       if (newButtonModal) {
         newButtonModal.addEventListener("click", (e) => {
           console.log('Botón cerrar clickeado');
@@ -333,14 +317,15 @@ containerProducts.addEventListener("click", (e) => {
 
 const inputSearch = document.getElementById("input");
 
+//Evento para el input de búsqueda
 inputSearch.addEventListener("keyup", (e) => {
   console.log('Palabra Ingresada: ', e.target.value);
   if (e.target.value.length == 0) {
-    tituloPrincipal.innerText = `${colectionText}`;
+    titleMajor.innerText = `${colectionText}`;
     loadProducts(productosRopa);
   }
   if (e.target.value.length > 1) {
-    tituloPrincipal.innerText = "Busqueda personalizada"
+    titleMajor.innerText = "Busqueda personalizada"
     const result = liveSearch(productosRopa, e.target.value);
     if (result.length == 0) {
 
@@ -351,6 +336,7 @@ inputSearch.addEventListener("keyup", (e) => {
   }
 })
 
+//Funcion para la búsqueda de un producto por input
 function liveSearch(productos, search) {
   if (!search.trim()) return productos;
 
@@ -360,13 +346,3 @@ function liveSearch(productos, search) {
   return result;
 }
 
-function showSpinner(containerProducts, containerSpinner, tituloPrincipal) {
-  containerProducts.innerText = "";
-  containerSpinner.style.display = "flex";
-  tituloPrincipal.style.display = "none";
-}
-
-function closeSpinner(containerSpinner, tituloPrincipal) {
-  containerSpinner.style.display = "none";
-  tituloPrincipal.style.display = "flex";
-}
