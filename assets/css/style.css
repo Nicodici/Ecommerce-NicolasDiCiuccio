@@ -19,7 +19,8 @@ ul {
   align-items: center;
   margin: 0 auto;
   height: 60px;
-  flex-wrap: wrap;        /* ← CLAVE: Permite que se envuelvan */
+  flex-wrap: wrap;
+  /* ← CLAVE: Permite que se envuelvan */
   gap: 1rem;
 }
 
@@ -37,7 +38,8 @@ ul {
 
 .li-span {
   color: #f0f0f0;
-  font-size: clamp(0.9rem, 2.5vw, 1.2rem);  /* ← Texto fluido */
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  /* ← Texto fluido */
   padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 20px);
   text-align: center;
   text-decoration: none;
@@ -45,14 +47,17 @@ ul {
   background-color: transparent;
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
-  white-space: nowrap;     /* ← Evita salto de línea */
+  white-space: nowrap;
+  /* ← Evita salto de línea */
   display: block;
 }
+
 .li-span:hover {
   color: #3157ff;
   border-radius: 5px;
   /* ✅ Removí el cambio de font-size para evitar saltos */
-  transform: scale(1.05);  /* ← Alternativa más suave */
+  transform: scale(1.05);
+  /* ← Alternativa más suave */
   transition: all 0.3s ease-in-out;
 }
 
@@ -61,6 +66,7 @@ ul {
   font-size: larger;
   color: rgb(255, 255, 255);
 }
+
 .icon {
   width: 50px;
   height: 50px;
@@ -75,11 +81,12 @@ a {
 }
 
 @import url("https://fonts.googleapis.com/css?family=Varela+Round");
+
 html {
   box-sizing: border-box;
 }
 
-/* From Uiverse.io by Shaidend */ 
+/* From Uiverse.io by Shaidend */
 .InputContainer {
   height: 40px;
   display: flex;
@@ -143,14 +150,16 @@ html {
   transition-duration: 0.3s;
 }
 
-.divFilters{
+.divFilters {
   background-color: #000000;
 }
+
 .titulos {
   display: flex;
-  justify-content: left;
+  justify-content: center;
   margin: 25px;
 }
+
 .titulo-p {
   font-family: "Varela Round", sans-serif;
   color: #000000;
@@ -179,7 +188,8 @@ html {
 /* Contenedor de imagen con tamaño fijo */
 .image {
   width: 100%;
-  height: 200px;         /* Alto fijo para todas las imágenes */
+  height: 200px;
+  /* Alto fijo para todas las imágenes */
   background: rgb(241, 241, 241);
   display: flex;
   align-items: center;
@@ -187,13 +197,15 @@ html {
   overflow: hidden;
   border-radius: 8px;
   margin-bottom: 1rem;
-  flex-shrink: 0;        /* No se encoge */
+  flex-shrink: 0;
+  /* No se encoge */
 }
 
 .image-product {
   width: 100%;
   height: 100%;
-  object-fit: cover;     /* Mantiene proporción, rellena el contenedor */
+  object-fit: cover;
+  /* Mantiene proporción, rellena el contenedor */
   object-position: center;
 }
 
@@ -201,7 +213,8 @@ html {
 .info-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;  /* Distribuye el espacio */
+  justify-content: space-between;
+  /* Distribuye el espacio */
   flex-grow: 1;
   gap: 0.1rem;
   max-height: 90px;
@@ -220,7 +233,7 @@ html {
   height: 500px;
   justify-content: center;
   align-items: center;
-  display:none;
+  display: none;
   width: 100%;
   height: 100%;
   margin-top: 200px;
@@ -230,18 +243,23 @@ html {
   0% {
     transform: rotateX(0);
   }
+
   12.5% {
     transform: rotateX(90deg);
   }
+
   25% {
     transform: rotateX(180deg);
   }
+
   37.5% {
     transform: rotateX(270deg);
   }
+
   50% {
     transform: rotateX(360deg);
   }
+
   100% {
     transform: rotateX(360deg);
   }
@@ -250,50 +268,61 @@ html {
 #containerSpinner div:nth-child(1) {
   animation-delay: 0s;
 }
+
 #containerSpinner div:nth-child(2) {
   animation-delay: 0.1s;
 }
+
 #containerSpinner div:nth-child(3) {
   animation-delay: 0.2s;
 }
+
 #containerSpinner div:nth-child(4) {
   animation-delay: 0.3s;
 }
+
 #containerSpinner div:nth-child(5) {
   animation-delay: 0.4s;
 }
+
 #containerSpinner div:nth-child(6) {
   animation-delay: 0.5s;
 }
+
 #containerSpinner div:nth-child(7) {
   animation-delay: 0.6s;
 }
+
 /* Fin contenedor spinner */
 
 
 /* Contenedor del título con altura fija */
 .title-container {
-  height: 2rem;          /* Altura fija para títulos */
+  height: 2rem;
+  /* Altura fija para títulos */
   display: flex;
   align-items: flex-start;
   overflow: hidden;
 }
 
-.verMas{
+.verMas {
   font-size: 0.75rem;
   color: #2384c5;
   cursor: pointer;
   margin-left: auto;
-  margin-top:0.2rem
+  margin-top: 0.2rem
 }
+
 .card .title {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   font-weight: 500;
   color: #333;
   line-height: 1.2;
-  -webkit-line-clamp: 2;  /* Máximo 2 líneas */
-  line-clamp: 2;          /* Propiedad estándar */
+  -webkit-line-clamp: 2;
+  /* Máximo 2 líneas */
+  line-clamp: 2;
+  /* Propiedad estándar */
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
@@ -304,14 +333,15 @@ html {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 1.2rem;
   color: #181818;
-  margin: 0 0 20px 0 ;
+  margin: 0 0 20px 0;
 }
 
 /* Contenedor del botón */
 .button-container {
-  margin-top: auto;      /* Empuja el botón hacia abajo */
+  margin-top: auto;
+  /* Empuja el botón hacia abajo */
   padding-top: 1rem;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -327,7 +357,8 @@ html {
 
 /* css button */
 .productAddBtn {
-  width: 100%;              /* Botón ocupa todo el ancho disponible */
+  width: 100%;
+  /* Botón ocupa todo el ancho disponible */
   padding: 12px 20px;
   border: none;
   border-radius: 8px;
@@ -338,7 +369,7 @@ html {
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
-  }
+}
 
 .productAddBtn:hover {
   background-color: #1e96e8;
@@ -356,6 +387,7 @@ html {
   outline: none;
   box-shadow: 0 0 0 3px rgba(43, 168, 251, 0.3);
 }
+
 /* fin css del button  */
 /* Fin de card */
 
@@ -411,6 +443,7 @@ html {
 .item-list-button:hover {
   border: 2px solid var(--light);
 }
+
 .item-list-button:focus {
   background-color: var(--primary);
   border: 2px solid var(--primary-shadow);
@@ -422,6 +455,7 @@ html {
   align-items: center;
   gap: 1rem;
 }
+
 .cart-button .cart-icon {
   width: 1rem;
 }
@@ -441,8 +475,8 @@ html {
   align-items: center;
   height: 80px;
   padding: 0px 20px
-
 }
+
 body,
 html {
   width: 100%;
@@ -520,6 +554,7 @@ html {
     transform: translateX(100%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -531,12 +566,15 @@ html {
     transform: scale(0.3);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.05);
   }
+
   70% {
     transform: scale(0.9);
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -573,27 +611,24 @@ html {
 /* Contenedor de productos con grid responsive */
 .cont-products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 10px;
-  padding: 0px 60px 0px 60px;
-  justify-items: center;   /* Centra las cards horizontalmente */
-  max-width: 1400px;       /* Ancho máximo del contenedor */
-  margin: 0 auto;          /* Centra el contenedor */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-items: center;
+  /* Centra las cards horizontalmente */
+  max-width: 1400px;
+  /* Ancho máximo del contenedor */
+  margin: 0 auto;
+  /* Centra el contenedor */
   min-height: 35vh;
   align-items: center;
 }
 
-/* Asegurar que cada producto no exceda el tamaño de la card */
+/* Asegura que cada producto no exceda el tamaño de la card */
 .product {
   width: 100%;
   max-width: 280px;
   display: flex;
   justify-content: center;
 }
-
-
-
-
 
 /* <--------------footer----------------> */
 .footer {
@@ -639,10 +674,11 @@ html {
 /* <------------fin footer------------> */
 
 /* <------------inicio modal card------------> */
-.backdrop{
+.backdrop {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8); /* Usar rgba en lugar de opacity */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Usar rgba en lugar de opacity */
   position: fixed;
   z-index: 1000;
   top: 0;
@@ -652,7 +688,6 @@ html {
   justify-content: center;
 }
 
-/* Modal cerrado por defecto */
 .modal {
   display: none;
 }
@@ -670,7 +705,7 @@ html {
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
-  
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto 1fr auto;
@@ -684,7 +719,7 @@ html {
 }
 
 /* Grid Areas del Modal */
-.modal-image { 
+.modal-image {
   grid-area: imagen;
   display: flex;
   align-items: center;
@@ -701,7 +736,7 @@ html {
   border-radius: 8px;
 }
 
-.modal-info { 
+.modal-info {
   grid-area: info;
   display: flex;
   flex-direction: column;
@@ -722,12 +757,14 @@ html {
   flex-direction: column;
   gap: 8px;
 }
-.container-talles{
+
+.container-talles {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
-.elemento-talle{
+
+.elemento-talle {
   margin-top: 5px;
   margin-bottom: 15px;
   background-color: #6b7280;
@@ -736,12 +773,12 @@ html {
   padding: 10px 20px;
   border-radius: 6px;
   transition: background-color 0.3s ease;
-  display:flex;
+  display: flex;
   justify-content: center;
   width: 45px;
 }
 
-.modal-price { 
+.modal-price {
   grid-area: precio;
   font-size: clamp(1.2rem, 3.5vw, 1.8rem);
   font-weight: bold;
@@ -749,7 +786,7 @@ html {
   margin-top: clamp(15px, 4vw, 30px);
 }
 
-.modal-description { 
+.modal-description {
   grid-area: descripcion;
   padding: clamp(10px, 2vw, 15px) 0;
   line-height: 1.6;
@@ -758,7 +795,7 @@ html {
   font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
-.modal-actions { 
+.modal-actions {
   grid-area: acciones;
   display: flex;
   justify-content: space-between;
@@ -798,57 +835,178 @@ html {
 }
 
 
-
-
+/* Media Queries para el modal */
 
 @media (max-width: 480px) {
+
+      .cont-products {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+  .product{
+    width: 100%;
+  }
+  /* Cards de productos */
+  .card {
+    width: 100%;
+    max-width: 280px;
+    height: 350px;
+    margin: 0 auto;
+  }
+
+  .image {
+    height: 180px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+    margin: 8px 0;
+  }
+
+  .price {
+    font-size: 0.85rem;
+    margin: 0px 0px 10px 0px;
+  }
+
+  .btn-add-cart {
+    padding: 8px 15px;
+    font-size: 0.75rem;
+  }
+
+  /* Modal responsive */
+  .modal-content {
+    width: 95vw;
+    margin: 10px;
+  }
+
+  .modal-image {
+    height: 200px;
+  }
+
+  .modal-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-description {
+    font-size: 0.85rem;
+  }
+
+  .modal-price {
+    font-size: 1.1rem;
+  }
+
+  /* Carrito */
+  .container-cart-products {
+    padding: 10px;
+  }
+
+  .cart-product {
+    padding: 10px;
+  }
+
+  .image-cart {
+    width: 60px;
+    height: 60px;
+  }
+
+  .title-cart {
+    font-size: 0.85rem;
+  }
+
+  .price-cart {
+    font-size: 0.8rem;
+  }
+
+  /* Navegación */
+  .menu {
+    padding: 8px;
+    gap: 3px;
+  }
+
+  .li-span {
+    font-size: 0.8rem;
+    padding: 8px 6px;
+  }
+
+  .divFilters {
+    padding: 0.5rem;
+  }
+
+  .marca {
+    display: none;
+  }
+
+  .menu {
+    flex-direction: row;
+    gap: 0.5rem;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  .li-button {
+    width: 100%;
+    max-width: 200px;
+    /* ← Ancho máximo */
+    margin: 0;
+  }
+
+  .li-span {
+    font-size: 0.95rem;
+    padding: 12px 20px;
+  }
+
+  .li-span:hover {
+    transform: scale(1.02);
+    /* ← Efecto más sutil en móvil */
+  }
+
   .backdrop {
     padding: 10px;
     padding-top: 20px;
   }
-  
+
   .contenido {
     padding: 15px;
     min-height: auto;
     max-height: 95vh;
     border-radius: 12px;
   }
-  
+
   .modal-image {
     height: 200px;
   }
-  
+
   .modal-image img {
     max-height: 180px;
     width: 60%;
   }
-  
+
   .modal-title {
     font-size: 1.2rem;
     text-align: center;
   }
-  
+
   .modal-price {
     font-size: 1.4rem;
     text-align: center;
     margin-top: 10px;
   }
-  
+
   .modal-description {
     font-size: 0.9rem;
     padding: 12px 0;
   }
-  
+
   .container-talles {
     gap: 6px;
   }
-  
+
   .elemento-talle {
     padding: 8px 12px;
     font-size: 0.85rem;
     min-width: 45px;
   }
-  
+
   #dropModal {
     top: 8px;
     right: 8px;
@@ -862,27 +1020,31 @@ html {
     padding: 12px;
     gap: 12px;
   }
-  
+
   .modal-image {
     height: 160px;
   }
-  
+
   .modal-image img {
     max-height: 140px;
   }
-  
+
   .modal-title {
     font-size: 1.1rem;
   }
-  
+
   .modal-price {
     font-size: 1.3rem;
   }
 }
 
-.descripcion { grid-area: descripcion; }
+.descripcion {
+  grid-area: descripcion;
+}
 
-.boton { grid-area: boton; }
+.boton {
+  grid-area: boton;
+}
 
 
 /* Modal abierto */
@@ -890,13 +1052,14 @@ html {
   display: block;
 }
 
-#dropModal{
-  position:absolute;
-  top:10px;
-  right:10px;
-  cursor:pointer;
+#dropModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
-.btnModalClose{
+
+.btnModalClose {
   background-color: #ff4d4d;
   color: white;
   border: none;
@@ -910,18 +1073,21 @@ html {
 .modal.open .contenido {
   animation: fadeIn 0.3s ease-out;
 }
-.modalProduct{
+
+.modalProduct {
   width: 100%;
   height: 100%;
   padding: 20px;
   z-index: 1010;
-  position: relative;}
+  position: relative;
+}
 
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -934,12 +1100,14 @@ html {
 /* Contenedor principal del carrito */
 #cart-products {
   width: 100%;
-  max-width: 900px;           /* Ancho máximo */
-  margin: 20px auto;          /* Centrado automático */
+  max-width: 900px;
+  /* Ancho máximo */
+  margin: 20px auto;
+  /* Centrado automático */
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px;          
+  gap: 15px;
   min-height: 200px;
 }
 
@@ -955,7 +1123,7 @@ html {
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  position: relative; 
+  position: relative;
 }
 
 .div-cart-product:hover {
@@ -969,8 +1137,9 @@ html {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 80px 1fr 120px 120px 50px;  /* Columnas fijas */
-  grid-template-areas: 
+  grid-template-columns: 80px 1fr 120px 120px 50px;
+  /* Columnas fijas */
+  grid-template-areas:
     "imagen nombre  precio cantidad eliminar";
   gap: 15px;
   align-items: center;
@@ -1150,128 +1319,75 @@ html {
   height: 50px;
 }
 
-
-
-
-
-
-
-
-/* Móviles */
-@media (max-width: 480px) {
-  .divFilters {
-    padding: 0.5rem;
-  }
-  
-  .marca{
-    display:none;
-  }
-  .menu {
-    flex-direction: row; 
-    gap: 0.5rem;
-    height: auto;
-    padding: 1rem 0;
-  }
-  
-  .li-button {
-    width: 100%;
-    max-width: 200px;       /* ← Ancho máximo */
-    margin: 0;
-  }
-  
-  .li-span {
-    font-size: 0.95rem;
-    padding: 12px 20px;
-  }
-  
-  .li-span:hover {
-    transform: scale(1.02);  /* ← Efecto más sutil en móvil */
-  }
-}
-
 /* ============================================
-   🎯 SECCIÓN CONSOLIDADA DE MEDIA QUERIES
+    SECCIÓN CONSOLIDADA DE MEDIA QUERIES
    ============================================ */
 
 /* 1024px - Tablets horizontales */
 @media (max-width: 1024px) {
+
   /* Navegación de filtros */
   .menu {
     padding: 0.5rem;
     gap: 0.25rem;
   }
-  
+
   .li-button {
     margin: clamp(3px, 0.5vw, 8px);
   }
-  
+
   .li-span {
     font-size: clamp(0.85rem, 2vw, 1.1rem);
   }
-  
+
   /* Cards de productos */
   .image {
     height: 160px;
   }
-  
+
   .card {
     width: 220px;
     height: 290px;
   }
-  
+
   .price {
     font-size: 0.8rem;
     margin: 0px 0px 10px 0px;
   }
-}
-
-/* 930px - Tablets verticales */
-@media (max-width: 930px) {
-  .vestidos {
-    display: block;
-  }
-  
-  .menu {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .li-button {
-    margin: 2px;
+  .titulo-p{
+    font-size:1.8rem;
   }
 }
 
-/* 768px - Tablets pequeñas y móviles grandes */
 @media (max-width: 768px) {
+
   /* Layout principal */
   .cont-products {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    padding: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
-  
+
   /* Cards de productos */
   .card {
     width: 210px;
     height: 290px;
     margin: 10px;
   }
-  
+
   .image {
     height: 160px;
   }
-  
+
   .product {
     max-width: 250px;
   }
-  
+
   /* Modal responsive */
   .backdrop {
     padding: 20px;
     align-items: flex-start;
     padding-top: 40px;
   }
-  
+
   .contenido {
     width: 80%;
     max-width: none;
@@ -1288,7 +1404,7 @@ html {
       "descripcion"
       "acciones";
   }
-  
+
   .modal-content {
     width: 90vw;
     max-width: 500px;
@@ -1300,30 +1416,30 @@ html {
       "buttons";
     gap: 15px;
   }
-  
+
   .modal-image {
     height: 250px;
     align-self: center;
   }
-  
+
   .modal-image img {
     max-height: 220px;
     width: 70%;
     height: auto;
   }
-  
+
   .modal-actions {
     flex-direction: column;
     gap: 12px;
     margin-top: 20px;
   }
-  
+
   .modal-add-btn {
     width: 100%;
     padding: 14px 20px;
     font-size: 1rem;
   }
-  
+
   #dropModal {
     width: auto;
     min-width: 50px;
@@ -1331,219 +1447,132 @@ html {
     font-size: 0.95rem;
     align-self: center;
   }
-  
+
   .container-talles {
-    justify-content:left;
+    justify-content: left;
   }
-  
+
   .elemento-talle {
     min-width: 50px;
     text-align: center;
   }
-  
+
   .modal-info h3 {
     font-size: 1.3rem;
     margin-bottom: 10px;
   }
-  
+
   .modal-description {
     font-size: 0.9rem;
     line-height: 1.4;
   }
-  
+
   .modal-price {
     font-size: 1.3rem;
   }
-  
+
   .modal-buttons {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   .modal-buttons button {
     padding: 12px;
     font-size: 1rem;
   }
-  
+
   /* Carrito */
   .cart-products {
     grid-template-columns: 1fr;
     gap: 10px;
   }
-  
+
   .container-icon-total-cart {
     position: relative;
     margin: 10px 0;
   }
-  
+
   .container-cart-products {
     width: 100%;
     max-width: none;
     right: 0;
     left: 0;
   }
-  
+
   .cart-product {
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 15px;
   }
-  
+
   .image-cart {
     margin-bottom: 10px;
   }
-  
+
   .info-cart-product {
     margin-left: 0;
     width: 100%;
   }
-  
+
   .container-total-cart {
     margin-top: 15px;
     text-align: center;
   }
-  
+
   /* Navegación */
+  .navig{
+    padding: 0;
+  }
   .menu {
     height: auto;
-    padding: 1rem 0;
-    gap: 0.75rem;
     justify-content: center;
   }
-  
+
   .li-button {
     padding: 10px 16px;
     margin: 5px;
     flex: 1;
     min-width: 80px;
   }
-  
+
   .li-span {
     font-size: 1rem;
     padding: 10px 16px;
   }
-}
-
-/* 480px - Móviles */
-@media (max-width: 480px) {
-  /* Layout principal */
-  .cont-products {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 15px 10px;
-  }
   
-  /* Cards de productos */
-  .card {
-    width: 100%;
-    max-width: 280px;
-    height: 350px;
-    margin: 0 auto;
-  }
-  
-  .image {
-    height: 180px;
-  }
-  
-  .title {
-    font-size: 0.9rem;
-    margin: 8px 0;
-  }
-  
-  .price {
-    font-size: 0.85rem;
-    margin: 0px 0px 10px 0px;
-  }
-  
-  .btn-add-cart {
-    padding: 8px 15px;
-    font-size: 0.75rem;
-  }
-  
-  /* Modal responsive */
-  .modal-content {
-    width: 95vw;
-    margin: 10px;
-  }
-  
-  .modal-image {
-    height: 200px;
-  }
-  
-  .modal-info h3 {
-    font-size: 1.1rem;
-  }
-  
-  .modal-description {
-    font-size: 0.85rem;
-  }
-  
-  .modal-price {
-    font-size: 1.1rem;
-  }
-  
-  /* Carrito */
-  .container-cart-products {
-    padding: 10px;
-  }
-  
-  .cart-product {
-    padding: 10px;
-  }
-  
-  .image-cart {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .title-cart {
-    font-size: 0.85rem;
-  }
-  
-  .price-cart {
-    font-size: 0.8rem;
-  }
-  
-  /* Navegación */
-  .menu {
-    padding: 8px;
-    gap: 3px;
-  }
-  
-  .li-span {
-    font-size: 0.8rem;
-    padding: 8px 6px;
+  .titulo-p{
+    font-size:1.7rem;
   }
 }
 
 /* 430px - Móviles pequeños */
 @media (max-width: 430px) {
   .card {
-    width: 155px;
+    width: 180px;
     height: 220px;
     margin: 5px;
   }
-  
+
   .image {
     height: 120px;
   }
-  
+
   .title {
     font-size: 0.75rem;
     margin: 5px 0;
   }
-  
+
   .price {
     font-size: 0.7rem;
     margin: 0px 0px 8px 0px;
   }
-  
+
   .btn-add-cart {
     padding: 4px 8px;
     font-size: 0.65rem;
   }
-  
+
   .li-span {
     font-size: clamp(0.8rem, 3vw, 0.9rem);
   }
