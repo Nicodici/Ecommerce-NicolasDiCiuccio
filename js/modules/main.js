@@ -1,6 +1,7 @@
-import { productosRopa } from "../../data/products.js";
+// import { productosRopa } from "../../data/products.js";
 import { showSpinner, closeSpinner } from '../utils/spinner.js';
 import {handleEmptyCartClick} from '../utils/cartEmpty.js'
+import {getProducts} from '../services/api.js'
 // <<<<<<<<<<<<<QuerySelectors>>>>>>>>>>>
 //llamo al id del contenedor principal del index para manipular el doom
 const containerProducts = document.getElementById("cont-products");
@@ -9,7 +10,7 @@ const btnCategories = document.querySelectorAll(".li-button");
 //elemento para modificar el titulo principal
 const titleMajor = document.getElementById("tit-principal");
 //evitar hardcodeo
-const colectionText = "Colección 2025"
+const colectionText = "Colección 2025";
 //numero del carrito
 const numberCart = document.querySelector("#number");
 //carrito del localStorage
@@ -20,6 +21,53 @@ const navDiv = document.querySelector(".nav-div:last-child");
 const containerSpinner = document.getElementById("containerSpinner")
 // <<<<<<<<<<<<<QuerySelectors>>>>>>>>>>>
 
+// Variable global para productos
+let productosRopa = [];
+
+// 🚀 Función de inicialización asíncrona
+async function initializeApp() {
+  try {
+    showSpinner(containerProducts, containerSpinner, titleMajor);
+
+    // Cargar productos desde API
+    const apiProducts = await getProducts();
+
+    // 🔄 Mapear datos de API a tu estructura
+    productosRopa = apiProducts.map(product => ({
+      id: product.id,
+      nombre: product.title,
+      categoria: {
+        id: product.category.replace(/\s+/g, '').toLowerCase(), // Sin espacios y minúsculas
+        nombre: product.category
+      },
+      precio: Math.round(product.price * 1000), // Convertir a pesos (ejemplo)
+      imagen: product.image,
+      cantidad: Math.floor(Math.random() * 50) + 1, // Cantidad aleatoria
+      descripcion: product.description
+    }));
+
+    console.log('✅ Productos mapeados:', productosRopa);
+
+    // Cargar productos inicialmente
+    loadProducts(productosRopa);
+    titleMajor.innerHTML = `${colectionText}`;
+
+    closeSpinner(containerSpinner, titleMajor);
+  } catch (error) {
+    console.error('Error al inicializar la app:', error);
+    closeSpinner(containerSpinner, titleMajor);
+
+    // Mostrar mensaje de error al usuario
+    containerProducts.innerHTML = `
+      <div style="text-align: center; padding: 2rem;">
+        <h3>Error al cargar productos</h3>
+        <p>Por favor, recarga la página</p>
+      </div>
+    `;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initializeApp);
 
 //Funcion que carga los productos
 function loadProducts(productos) {
@@ -106,7 +154,7 @@ let sumCartLst = 0;
 
 
 //funcion que verifica el local storage y actualiza el carrito.
-const cartLocalStorage = () => {
+function cartLocalStorage() {
   const productsCart = JSON.parse(localStorage.getItem("products-in-cart"));
 
   if (productsCart && productsCart.length > 0) {
@@ -208,24 +256,14 @@ function openModal(producto) {
         <div class="modal-info">
           <h2 class="modal-title">${producto.nombre}</h2>
         </div>
-        
         <div class="modal-description">
         ${producto.descripcion}
         </div>
         <div class="modal-detalles">
-        <div class="modal-talles">
-        <p> Talles disponibles: </p>
-        <div class="container-talles">
-        <div class="elemento-talle">S</div>
-        <div class="elemento-talle">M</div>
-        <div class="elemento-talle">L</div>
-        <div class="elemento-talle">XL</div>  
-        </div>
         <div class="modal-price">
         $${producto.precio.toLocaleString()}
         </div>
         </div>
-        
         <div class="modal-actions">
           <button class="modal-add-btn" data-id="${producto.id}">
             Agregar al carrito

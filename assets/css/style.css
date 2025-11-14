@@ -179,7 +179,7 @@ html {
 /* Contenedor de imagen con tamaño fijo */
 .image {
   width: 100%;
-  height: 200px;         /* Alto fijo para todas las imágenes */
+  height: 200px;
   background: rgb(241, 241, 241);
   display: flex;
   align-items: center;
@@ -191,10 +191,7 @@ html {
 }
 
 .image-product {
-  width: 100%;
   height: 100%;
-  object-fit: cover;     /* Mantiene proporción, rellena el contenedor */
-  object-position: center;
 }
 
 /* Contenedor de información que se expande */
@@ -714,6 +711,7 @@ html {
   margin-bottom: clamp(8px, 1.5vw, 12px);
   color: #333;
   line-height: 1.3;
+  padding-top:30px;
 }
 
 .modal-detalles {

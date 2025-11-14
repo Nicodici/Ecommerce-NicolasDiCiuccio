@@ -1,7 +1,7 @@
 {
   "name": "ecommerce-project",
   "version": "1.0.0",
-  "description": "Ecommerce project that works with both Node.js server and Docker",
+  "description": "Ecommerce",
   "main": "server.js",
   "scripts": {
     "dev": "node --watch server.js",
