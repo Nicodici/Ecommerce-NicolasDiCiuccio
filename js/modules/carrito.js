@@ -1,5 +1,5 @@
 let productsCart = JSON.parse(localStorage.getItem("products-in-cart"));
-
+const confirmBuyButton = document.getElementById("confirmBuyBtn");
 const cartEmpty = document.getElementById("cartEmpty");
 const clearCartButton = document.getElementById("clearCartBtn");
 const cartContainer = document.getElementById("cart-products");
@@ -7,27 +7,23 @@ const divActions = document.querySelector(".cart-actions-total");
 const totalPrice = document.getElementById("total-price");
 const totalQuantity = document.getElementById("total-quantity");
 
-
-/**
- * Renderiza los productos en el carrito
- * @param {Array<Object>} products 
- * @returns 
- */
 function renderCart(products) {
-    if (products === null || products.length === 0) {
-        cartEmptyRedirect();
-        return;
-    }
+  if (products === null || products.length === 0) {
+    cartEmptyRedirect();
+    return;
+  }
 
-    cartContainer.innerHTML = ``; // Primero limpio el html del contenedor
+  cartContainer.innerHTML = ``; // Primero limpio el html del contenedor
 
-    products.forEach((product) => {
-        const productDiv = document.createElement("div");
-        productDiv.classList.add("div-cart-product");
+  products.forEach((product) => {
+    const productDiv = document.createElement("div");
+    productDiv.classList.add("div-cart-product");
 
-        productDiv.innerHTML = `
+    productDiv.innerHTML = `
         <div class="product-details">
-            <img class="image-cart" src="${product.imagen}" alt="${product.nombre}">
+            <img class="image-cart" src="${product.imagen}" alt="${
+      product.nombre
+    }">
             <h3 class="product-name">${product.nombre}</h3>
             <p class="product-quantity">Cant: ${product.cantidad}</p>
             <p class="product-price">$${product.precio.toLocaleString()}</p>
@@ -37,96 +33,118 @@ function renderCart(products) {
         </div>
         `;
 
-        cartContainer.append(productDiv);
-    });
+    cartContainer.append(productDiv);
+  });
 
+  const total = products.reduce((acc, product) => {
+    return acc + product.precio * product.cantidad;
+  }, 0);
+  totalPrice.innerText = `Importe total: $${total}`; // Actualizar el precio total
 
-    const total = products.reduce((acc, product) => {
-        return acc + product.precio * product.cantidad;
-    }, 0);
-    totalPrice.innerText = `Importe total: $${total}`; // Actualizar el precio total
-
-    totalQuantity.innerText = `Cantidad de productos: ${products.reduce((acc, product) => acc + product.cantidad, 0)}`; // Actualizar la cantidad total
+  totalQuantity.innerText = `Cantidad de productos: ${products.reduce(
+    (acc, product) => acc + product.cantidad,
+    0
+  )}`; // Actualizar la cantidad total
 }
 //Llamo a la funcion para renderizar el carrito
 renderCart(productsCart);
 
-
 function clearCart() {
-    const productCount = productsCart ? productsCart.length : 0;
+  Swal.fire({
+    title: "¿Está seguro?",
+    text: "Si acepta, se borraran todos los productos del carrito.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "¡Sí, bórralo!",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const productCount = productsCart ? productsCart.length : 0;
 
-    localStorage.clear();
-    productsCart = [];
+      localStorage.clear();
+      productsCart = [];
 
-    // Notificación de carrito vaciado
-    if (productCount > 0) {
+      // Notificación de carrito vaciado
+      if (productCount > 0) {
         Toastify({
-            text: `🧹 Carrito vaciado (${productCount} productos eliminados)`,
-            duration: 4000,
-            gravity: "top",
-            position: "center",
-            backgroundColor: "#ffa726",
-            className: "clear-cart-toast",
-            stopOnFocus: true,
-            onClick: function () {
-                console.log("Notificación de carrito vaciado clickeada");
-            }
+          text: `🧹 Carrito vaciado (${productCount} productos eliminados)`,
+          duration: 4000,
+          gravity: "top",
+          position: "center",
+          style: {
+            background: "#ffa726",
+          },
+          className: "clear-cart-toast",
+          stopOnFocus: true,
+          onClick: function () {
+            console.log("Notificación de carrito vaciado clickeada");
+          },
         }).showToast();
+      }
+
+      cartEmptyRedirect();
     }
-
-    cartEmptyRedirect();
+  });
 }
-
 clearCartButton.addEventListener("click", clearCart);
 
 // Delegación de eventos para los botones de eliminar
 cartContainer.addEventListener("click", (e) => {
-    // Verificar si el elemento clickeado es un botón de eliminar
-    if (e.target.closest(".delete-btn")) {
-        const deleteButton = e.target.closest(".delete-btn");
-        const productId = parseInt(deleteButton.id);
+  // Verificar si el elemento clickeado es un botón de eliminar
+  if (e.target.closest(".delete-btn")) {
+    const deleteButton = e.target.closest(".delete-btn");
+    const productId = parseInt(deleteButton.id);
 
-        // Encontrar y eliminar el producto del array
-        const index = productsCart.findIndex(product => product.id === productId);
+    // Encontrar y eliminar el producto del array
+    const index = productsCart.findIndex((product) => product.id === productId);
 
-        if (index !== -1) {
-            const deletedProduct = productsCart[index];
-            productsCart.splice(index, 1);
-            localStorage.setItem("products-in-cart", JSON.stringify(productsCart));
+    if (index !== -1) {
+      const deletedProduct = productsCart[index];
+      productsCart.splice(index, 1);
+      localStorage.setItem("products-in-cart", JSON.stringify(productsCart));
 
-            // Actualizar la variable global y re-renderizar
-            productsCart = JSON.parse(localStorage.getItem("products-in-cart")) || [];
-            renderCart(productsCart);
+      // Actualizar la variable global y re-renderizar
+      productsCart = JSON.parse(localStorage.getItem("products-in-cart")) || [];
+      renderCart(productsCart);
 
-            console.log(`Producto con ID ${productId} eliminado del carrito`);
+      console.log(`Producto con ID ${productId} eliminado del carrito`);
 
-            // Notificación de producto eliminado
-            Toastify({
-                text: `🗑️ "${deletedProduct.nombre}" eliminado del carrito`,
-                duration: 3000,
-                gravity: "bottom",
-                position: "right",
-                backgroundColor: "#ff6b6b",
-                className: "delete-toast",
-                stopOnFocus: true,
-                onClick: function () {
-                    console.log("Notificación de eliminación clickeada");
-                }
-            }).showToast();
-        }
+      // Notificación de producto eliminado
+      Toastify({
+        text: `🗑️ "${deletedProduct.nombre}" eliminado del carrito`,
+        duration: 3000,
+        gravity: "bottom",
+        position: "right",
+        backgroundColor: "#ff6b6b",
+        className: "delete-toast",
+        stopOnFocus: true,
+        onClick: function () {
+          console.log("Notificación de eliminación clickeada");
+        },
+      }).showToast();
     }
+  }
 });
-
-
 
 //funcion que se ejecuta cuando el carrito esta vacio
 const cartEmptyRedirect = () => {
-    cartContainer.classList.add("cart-font-color");
-    cartContainer.innerText = `No hay productos en el carrito 
+  cartContainer.classList.add("cart-font-color");
+  cartContainer.innerText = `No hay productos en el carrito 
         Será redireccionado al menu principal en 3 segundos`;
-    divActions.style.visibility = "hidden";
+  divActions.style.visibility = "hidden";
 
-    setTimeout(() => {
-        window.location.href = "index.html";
-    }, 2000);
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 2000);
 };
+
+//Evento para confirmar compra
+confirmBuyButton.addEventListener("click", () => {
+  Swal.fire({
+  title: "Compra realizada con éxito",
+  icon: "success",
+  draggable: true
+});
+});
